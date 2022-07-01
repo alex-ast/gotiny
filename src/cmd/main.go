@@ -30,6 +30,23 @@ func SetupTermHandler() {
 }
 
 func main() {
+	//XXX - debug, remove it
+	web.StartWeb()
+
+	var cpuprofile = flag.String("cpuprofile", "", "write cpu profile to file")
+
+	flag.Parse()
+
+	// Init profiling
+	if *cpuprofile != "" {
+		f, err := os.Create(*cpuprofile)
+		if err != nil {
+			log.Fatal(err)
+		}
+		pprof.StartCPUProfile(f)
+		defer pprof.StopCPUProfile()
+	}
+
 	config, err := LoadConfig(CONFIG_FILE)
 	if err != nil {
 		log.Fatal("FATAL: Can't read config.", err)
