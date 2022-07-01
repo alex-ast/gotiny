@@ -1,0 +1,130 @@
+swagger: '2.0'
+info:
+  title: URL shortener API
+  description: ""
+  version: 0.0.1
+  contact:
+    name: Alex Astapchuk
+    url: https://alex.astapchuk.com
+    email: alex.astapchuk@gmail.com
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+
+paths:
+  /api/url:
+    post:
+      summary: Creates new short url
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          description: Long URL to be shortened and stored
+          required: true
+          schema:
+            $ref: "#/definitions/UrlRequest"
+      responses:
+        "200":
+          description: successful operation
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/GetUrlRequest"
+  
+  /api/url/{id}:
+    get:
+      description: Returns long URL for the given short one.
+      produces:
+        - application/json
+      parameters:
+        - name: id
+          in: path
+          description: "id of short URL to return"
+          required: true
+          type: string
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/GetUrlRequest"
+
+    delete:
+      description: Deletes the given short URL
+      produces:
+        - application/json
+      parameters:
+        - name: id
+          in: path
+          description: "id of short URL to delete"
+          required: true
+          type: string
+      responses:
+        '404':
+          description: "Object not found"
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/DeleteUrlResponse"
+
+definitions:
+  UrlInfo:
+    type: object
+    properties:
+      shortId:
+        type: string
+      longUrl:
+        type: string
+      created:
+        type: string
+      expires:
+        type: string
+
+  Status:
+    type: object
+    properties:
+      success:
+        type: boolean
+      errorMsg:
+        type: string
+
+  CreateUrlRequest:
+    type: object
+    properties:
+      longUrl:
+        type: string
+
+  CreateUrlResponse:
+    type: object
+    properties:
+      urlInfo:
+        $ref: '#/definitions/UrlInfo'
+      status:
+        $ref: '#/definitions/Status'
+
+  GetUrlRequest:
+    type: object
+    properties:
+      shortId:
+        type: string
+
+  GetUrlResponse:
+    type: object
+    properties:
+      status:
+        $ref: '#/definitions/Status'
+      urlInfo:
+        $ref: '#/definitions/UrlInfo'
+      # Whether request was served from: 'cache' or 'db' 
+      source:
+        type: string
+
+  DeleteUrlResponse:
+    type: object
+    properties:
+      shortId:
+        type: string
+      status:
+        $ref: '#/definitions/Status'
