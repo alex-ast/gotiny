@@ -4,13 +4,17 @@ import (
 	"os"
 	"path/filepath"
 
+	"github.com/alex-ast/gotiny/apisrv"
 	"github.com/alex-ast/gotiny/cache"
 	"github.com/alex-ast/gotiny/db"
+	"github.com/alex-ast/gotiny/metrics"
 
 	"github.com/spf13/viper"
 )
 
 type Config struct {
+	ApiCfg     apisrv.ApiCfg      `mapstructure:"api"`
+	MetricsCfg metrics.MetricsCfg `mapstructure:"metrics"`
 	CacheCfg   cache.CacheCfg     `mapstructure:"cache"`
 	DbCfg      db.DbCfg           `mapstructure:"db"`
 }
