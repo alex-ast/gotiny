@@ -1,0 +1,28 @@
+# API server config
+api:
+    Addr: ":81"
+    # Path to serve. "api" will serve "example.com/api/*"
+    Path: api
+    # Short URL length
+    ShortUrlLen: 7
+    # If generated id already exists in db, retry this many times
+    ShortUrlRetries: 5
+    # Enables debug query params
+    Debug: true
+
+cache:
+    # Supported types: 
+    #   none - not using caching
+    #   inproc - caching in mem locally
+    #   redis - use Redis as distributed cache. 'Connection' must be set.
+    Type: none
+    Connection: 127.0.0.1:6379
+
+db:
+    # Supported types:
+    #   inproc - does not use DB, stores in memory
+    #   MongoDB - MongoDB
+    Type: none
+    Connection: "mongodb://127.0.0.1:27017/"
+    Database: tinyurl-go
+
