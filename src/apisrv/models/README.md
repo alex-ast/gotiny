@@ -1,0 +1,1 @@
+This folder contains REST API strctures generated out of [OpenAPI specification](../../api/gotiny-api.yaml).
