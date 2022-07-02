@@ -7,7 +7,7 @@ services:
     ports:
       - "6379:6379"
     networks:
-      - test-network
+      - tinynet
 
   mp-mongodb:
     container_name: mp-mongodb
@@ -16,7 +16,7 @@ services:
     ports:
       - "27017:27017"
     networks:
-      - test-network
+      - tinynet
     environment:
       MONGO_DATA_DIR: /data/mongodb
       MONGO_LOG_DIR: /data/mongodb/log
@@ -25,20 +25,7 @@ services:
       - ~/data/mongodb/log:/data/mongodb/log
     command: mongod --smallfiles
 
-  mp-cassandra:
-    container_name: mp-cassandra
-    image: cassandra:4.0
-    restart: always
-    ports:
-      - 9042:9042
-    networks:
-      - test-network
-    volumes:
-      - ~/data/cassandra:/var/lib/cassandra
-    environment:
-      - CASSANDRA_CLUSTER_NAME=cassanda-cluster
-
 volumes:
  mongo-data:
 networks:
- test-network:
+  tinynet:
