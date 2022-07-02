@@ -10,19 +10,24 @@ api:
     # Enables debug query params
     Debug: true
 
+# Expose metrics and monitoring counters via HTTP
+metrics:
+    StartHTTP: true
+    Addr: ":82"
+    Path: /metrics
 cache:
     # Supported types: 
     #   none - not using caching
     #   inproc - caching in mem locally
     #   redis - use Redis as distributed cache. 'Connection' must be set.
-    Type: none
+    Type: redis
     Connection: 127.0.0.1:6379
 
 db:
     # Supported types:
     #   inproc - does not use DB, stores in memory
     #   MongoDB - MongoDB
-    Type: none
+    Type: MongoDB
     Connection: "mongodb://127.0.0.1:27017/"
     Database: tinyurl-go
 
