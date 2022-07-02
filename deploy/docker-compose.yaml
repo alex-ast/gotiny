@@ -1,0 +1,44 @@
+version: '3'
+services:
+  mp-redis:
+    container_name: mp-redis
+    image: redis:5
+    restart: always
+    ports:
+      - "6379:6379"
+    networks:
+      - test-network
+
+  mp-mongodb:
+    container_name: mp-mongodb
+    image: mongo:3.6
+    restart: always
+    ports:
+      - "27017:27017"
+    networks:
+      - test-network
+    environment:
+      MONGO_DATA_DIR: /data/mongodb
+      MONGO_LOG_DIR: /data/mongodb/log # TODO: /dev/null
+    volumes:
+      - ~/data/mongodb:/data/mongodb/data
+      - ~/data/mongodb/log:/data/mongodb/log
+    command: mongod --smallfiles # TODO? --quiet
+
+  mp-cassandra:
+    container_name: mp-cassandra
+    image: cassandra:4.0
+    restart: always
+    ports:
+      - 9042:9042
+    networks:
+      - test-network
+    volumes:
+      - ~/data/cassandra:/var/lib/cassandra
+    environment:
+      - CASSANDRA_CLUSTER_NAME=cassanda-cluster
+
+volumes:
+ mongo-data:
+networks:
+ test-network:
