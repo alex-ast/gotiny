@@ -12,6 +12,14 @@ ifneq (,$(findstring /cygdrive,$(WS_ROOT)))
 	WS_ROOT:=$(shell cygpath -m "${WS_ROOT}")
 endif
 
+# TODO: copy/md for Windows
+COPYCMD=cp
+MKDIRCMD=mkdir --parent
+ifeq ($(OS),Windows_NT)
+	EXE_EXT := .exe
+endif
+
+
 default: docker-build
 all: docker-build
 

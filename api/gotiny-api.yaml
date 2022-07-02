@@ -25,14 +25,14 @@ paths:
           description: Long URL to be shortened and stored
           required: true
           schema:
-            $ref: "#/definitions/UrlRequest"
+            $ref: "#/definitions/GetUrlRequest"
       responses:
         "200":
           description: successful operation
           schema:
             type: array
             items:
-              $ref: "#/definitions/GetUrlRequest"
+              $ref: "#/definitions/GetUrlResponse"
   
   /api/url/{id}:
     get:
