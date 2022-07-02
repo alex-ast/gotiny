@@ -110,7 +110,6 @@ func (cache *RedisCache) Connect() error {
 
 func (cache *RedisCache) Set(key string, obj any) error {
 	bytes := utils.MarshalToBytes(obj)
-	log.Printf("Set(\"%s\", \"%s\")\n", key, bytes)
 	err := cache.rdb.Set(cache.ctx, key, bytes, 0).Err()
 	if err != nil {
 		log.Println("WARN: redis cache Set failed", err)

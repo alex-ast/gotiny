@@ -77,11 +77,10 @@ func StartWeb() {
 		baseDir, _ = filepath.Abs(baseDir)
 	}
 
-	log.Printf("Starting server on %s, baseDir: %s", port, baseDir)
-	log.Printf("API URL: %s", apiURL)
-
 	http.HandleFunc("/", ServeHTTP)
 	go func() {
+		log.Printf("Starting server on %s, baseDir: %s", port, baseDir)
+		log.Printf("API URL: %s", apiURL)
 		log.Fatal(http.ListenAndServe(port, nil))
 	}()
 }

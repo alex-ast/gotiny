@@ -94,9 +94,11 @@ func (db *InprocDb) Delete(key string) error {
 func (db *MongoDb) Connect() error {
 	db.ctx = context.Background()
 
+	db.log.Printf("Connecting to MongoDB: %s", db.cfg.Connection)
 	clientOptions := options.Client().ApplyURI(db.cfg.Connection)
 	client, err := mongo.Connect(db.ctx, clientOptions)
 	if err != nil {
+		db.log.Fatal("Can't connect: " + err.Error())
 		return err
 	}
 
