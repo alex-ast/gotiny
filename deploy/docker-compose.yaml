@@ -19,11 +19,11 @@ services:
       - test-network
     environment:
       MONGO_DATA_DIR: /data/mongodb
-      MONGO_LOG_DIR: /data/mongodb/log # TODO: /dev/null
+      MONGO_LOG_DIR: /data/mongodb/log
     volumes:
       - ~/data/mongodb:/data/mongodb/data
       - ~/data/mongodb/log:/data/mongodb/log
-    command: mongod --smallfiles # TODO? --quiet
+    command: mongod --smallfiles
 
   mp-cassandra:
     container_name: mp-cassandra
