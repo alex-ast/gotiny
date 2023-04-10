@@ -1,5 +1,5 @@
 Implementaion of TinyURL-like REST API service. 
-Uses Redis for caching, MongoDB as database, Docker for containerization and for the build.
+Uses Redis for caching, MongoDB as database, Prometheus for matrics collection and Docker for containerization and for the build.
 
 Supports Create, Delete, Get operations.
 
